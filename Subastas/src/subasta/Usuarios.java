@@ -1,7 +1,7 @@
 package subasta;
 /**
  * 
- * @author Ruso
+ * @author JoseRuso
  * @author Juan
  * @author Miriam
  *
