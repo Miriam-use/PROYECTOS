@@ -37,6 +37,6 @@ public class Puja {
 	public String toString() {
 		return getClass().getName() + " [pujador=" + pujador.getNombre() 
 									+ ", cantidad=" + cantidad 
-									+ "]";
+									+ " €]";
 	}
 }

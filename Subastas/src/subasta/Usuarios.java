@@ -20,6 +20,8 @@ public class Usuarios {
 	private final String nombre;
 	private double credito;
 	private LinkedList<Subasta> subastasCreadas;
+//	private LinkedList<Puja> pujas;
+	
 /**
  * 
  * @param nombre
@@ -56,14 +58,14 @@ public class Usuarios {
 	}
 	
 	public String getMostrar() {
-		return "Intengrante de la subasta "+nombre+" con un credito de "+credito;
+		return "Intengrante de la subasta "+nombre+" con un credito de "+credito+" €";
 	}
 	
 	@Override
 	public String toString() {
 		return getClass().getName() + " [nombre=" + nombre  
 									+ ", credito="+ credito
-									+", subastasCreadas="+subastasCreadas.size()
+									+" €, subastasCreadas="+subastasCreadas.size()
 									+ "]";
 	}
 	
