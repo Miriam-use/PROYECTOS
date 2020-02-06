@@ -44,7 +44,7 @@ public class Menu_subasta {
 			subasta.cerrar();
 		}
 		
-		
+		System.out.println("\n"+subasta.PujaMayor());
 		
 		
 		System.out.println("Puja de enrique "+subasta.pujar(enrique, 200));
@@ -60,7 +60,7 @@ public class Menu_subasta {
 		usuarios.add(pedro);
 		usuarios.add(enrique);
 		for (Usuarios usuario : usuarios) {
-			System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" €");
+			System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" â‚¬");
 		}		
 				
 		//-	Muestra las subastas de las que son propietarios los tres usuarios.
@@ -78,7 +78,7 @@ public class Menu_subasta {
 		int opcion;
 
 		do {
-			// Al inicio de cada iteración mostramos el menú, y recogemos la opción
+			// Al inicio de cada iteraciÃ³n mostramos el menÃº, y recogemos la opciÃ³n
 			menu();
 			opcion = Integer.parseInt(sc.nextLine());
 
@@ -104,7 +104,7 @@ public class Menu_subasta {
 				usuarios.add(pedro);
 				usuarios.add(enrique);
 				for (Usuarios usuario : usuarios) {
-					System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" €");
+					System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" â‚¬");
 				}		
 						
 				//-	Muestra las subastas de las que son propietarios los tres usuarios.
@@ -136,7 +136,7 @@ public class Menu_subasta {
 		System.out.println("3. Cerrar subasta");
 		System.out.println("4. Realizar puja fuera de plazo (Enrique)");
 		System.out.println("5. Ejecutar subasta");
-		System.out.println("6. Consultar situación");
+		System.out.println("6. Consultar situaciÃ³n");
 		System.out.println("0. Salir");
 	}
 
