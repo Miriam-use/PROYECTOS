@@ -1,6 +1,5 @@
 package subasta;
 
-import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,8 +20,6 @@ public class Subasta {
 	private Usuarios propietario;
 	private boolean abierta;
 	private LinkedList<Puja> pujas;
-	private LocalTime tiempoSubasta;
-	
 /**
  * 	
  * @param producto
@@ -34,8 +31,6 @@ public class Subasta {
 		this.abierta = true;
 		this.pujas = new LinkedList<Puja>();
 		this.propietario.addSubasta(this);
-		tiempoSubasta=LocalTime.now();
-		tiempoSubasta=tiempoSubasta.plusMinutes(1);	
 	}
 	
 	public String getProducto() {
@@ -71,14 +66,14 @@ public class Subasta {
 		}
 	}
 /**
- * 	Este metodo permite realizar una puja sobre la subasta. La informacion necesaria 
+ * 	Este método permite realizar una puja sobre la subasta. La información necesaria 
  *  para pujar es el usuario que realiza la puja y la cantidad por la que puja. 
  *  La puja es aceptada si: 
- *    a) la subasta esta abierta, 
- *    b) el credito del usuario que la realiza es suficiente para la cantidad por la que puja; 
+ *    a) la subasta está abierta, 
+ *    b) el crédito del usuario que la realiza es suficiente para la cantidad por la que puja; 
  *    c) el usuario no es propietario de la subasta y 
  *    d) la cantidad es mayor que la cantidad de la puja mayor, si la hubiera. 
- *  Por tanto, esta operacion finaliza indicando si la puja ha sido aceptada (retorna un valor booleano). 
+ *  Por tanto, esta operación finaliza indicando si la puja ha sido aceptada (retorna un valor booleano). 
  *  Si la puja es aceptada, entonces se construye una puja y se almacena en la lista de pujas
  * 	
  * @param pujador Usuarios que realiza la puja
@@ -98,10 +93,9 @@ public class Subasta {
 			return false;
 		}
 	}
-	
 /**
- * 	Este metodo permite pujar sin indicar la cantidad, es decir, solo se requiere indicar el usuario que la realiza. 
- *  La cantidad sera un euro mas que la cantidad de la puja mayor. 
+ * 	Este método permite pujar sin indicar la cantidad, es decir, sólo se requiere indicar el usuario que la realiza. 
+ *  La cantidad será un euro más que la cantidad de la puja mayor. 
  *  Si no hubiera puja mayor, la cantidad sería de un euro.
  *  
  * @param pujador usuario que realiza la puja
@@ -115,43 +109,34 @@ public class Subasta {
 		}
 		return pujar (pujador, cantidad);
 	}
-	
-	public boolean cerrar () {
-		abierta=false;
-		return true;
-	}	
-	
 /**
- * 	Este metodo cierra la subasta (la ejecuta) realizando las transferencias de credito entre 
+ * 	Este método cierra la subasta (la ejecuta) realizando las transferencias de crédito entre 
  *  el usuario que ha ganado la subasta (puja mayor) y el usuario propietario. Es posible ejecutar 
- *  una subasta si se ha realizado alguna puja y la subasta está abierta. En tal caso, la ejecucion 
- *  de una subasta consiste en decrementar el credito del usuario que ha realizado la puja mayor e 
- *  incrementar el credito del propietario de la subasta por la cantidad de la puja mayor. 
- *  Una vez ejecutada, la subasta quedara cerrada. El metodo finaliza informando si la subasta 
+ *  una subasta si se ha realizado alguna puja y la subasta está abierta. En tal caso, la ejecución 
+ *  de una subasta consiste en decrementar el crédito del usuario que ha realizado la puja mayor e 
+ *  incrementar el crédito del propietario de la subasta por la cantidad de la puja mayor. 
+ *  Una vez ejecutada, la subasta quedará cerrada. El método finaliza informando si la subasta 
  *  ha podido ejecutarse o no (retorna un valor booleano).
  *  
  * @return true si la subasta ha podido ejecutarse y false en caso contrario
  */
-	
-	
 	public boolean ejecutar(){
+		if (getAbierta() && getPujaMayor() != null){
 			
-		if (cerrar()==true) {
-
-				
-				Usuarios ganador = getPujaMayor().getPujador();
-				
-				double cantidad = getPujaMayor().getCantidad();
-				
-				propietario.incrementarCredito(cantidad);
-				
-				ganador.decrementarCredito(cantidad);
-				
-				abierta = false;
-				
-				return true;
-		}		
-		return false;	
+			Usuarios ganador = getPujaMayor().getPujador();
+			
+			double cantidad = getPujaMayor().getCantidad();
+			
+			propietario.incrementarCredito(cantidad);
+			
+			ganador.decrementarCredito(cantidad);
+			
+			abierta = false;
+			
+			return true;
+		
+		} else
+			return false;
 	}
 	
 	@Override
@@ -159,7 +144,7 @@ public class Subasta {
 		return getClass().getName() + " [producto=" + producto
 									+ ", propietario=" + propietario.getNombre() 
 									+ ", abierta=" + abierta
-									+ ", pujas validas realizadas=" + pujas.size() 
+									+ ", pujas=" + pujas.size() 
 									+ "]";
 	}
 }
