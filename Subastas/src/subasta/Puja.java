@@ -20,7 +20,7 @@ public class Puja {
  * @param pujador
  * @param cantidad
  */
-	Puja(Usuarios pujador, double cantidad) {
+	public Puja(Usuarios pujador, double cantidad) {
 		this.pujador = pujador;
 		this.cantidad = cantidad;
 	}
@@ -37,6 +37,6 @@ public class Puja {
 	public String toString() {
 		return getClass().getName() + " [pujador=" + pujador.getNombre() 
 									+ ", cantidad=" + cantidad 
-									+ " €]";
+									+ "]";
 	}
 }
