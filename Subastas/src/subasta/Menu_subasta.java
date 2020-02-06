@@ -11,63 +11,65 @@ import subasta.Subasta;
 public class Menu_subasta {
 
 	static Scanner sc;
-	
-	public static void main(String[] args) throws InterruptedException {	
-		Usuarios juan = new Usuarios("Juan", 100);
-		Usuarios pedro = new Usuarios("Pedro", 150);
-		Usuarios enrique = new Usuarios("Enrique", 300);
 		
-		System.out.println("Inserte el tiempo es segundos que quiere que dure la subasta en segundos");
-		sc = new Scanner(System.in);
-		long sec=sc.nextLong();
-	
-		LocalTime time = LocalTime.now();
-		LocalTime time1 = time.plusSeconds(sec);
-		
-		Subasta subasta = new Subasta("Telefono Movil", juan);
+		public static void main(String[] args) throws InterruptedException {	
+			Usuarios juan = new Usuarios("Juan", 100);
+			Usuarios pedro = new Usuarios("Pedro", 150);
+			Usuarios enrique = new Usuarios("Enrique", 300);
+			
+			//-	Crea una subasta del producto "Teléfono Móvil" cuyo propietario sea el usuario Juan
+			
+			Subasta subasta = new Subasta("Telefono Movil", juan);
 
-		System.out.println("Puja de Pedro: "+subasta.pujar(pedro, 100));
-		
-		TimeUnit.SECONDS.sleep(29);
-		
-		if(LocalTime.now().isBefore(time1)) {
-			System.out.println("Se ha cerrado la subasta ");
-			subasta.cerrar();
-		}
-		
-		System.out.println("Puja de enrique: "+subasta.pujar(enrique, 50));
-		
-		TimeUnit.SECONDS.sleep(29);
-		
-		if(LocalTime.now().isBefore(time1)) {
-			System.out.println("Se ha cerrado la subasta ");
-			subasta.cerrar();
-		}
-		
-		System.out.println("\n"+subasta.PujaMayor());
-		
-		
-		System.out.println("Puja de enrique "+subasta.pujar(enrique, 200));
-		if(LocalTime.now().isBefore(time1)) {
-			System.out.println("Se ha cerrado la subasta ");
-			subasta.cerrar();
-		}
-		System.out.println("Se ha ejecutado la subasta "+subasta.ejecutar());
-		
-		
-		LinkedList<Usuarios> usuarios = new LinkedList<Usuarios>();
-		usuarios.add(juan);
-		usuarios.add(pedro);
-		usuarios.add(enrique);
-		for (Usuarios usuario : usuarios) {
-			System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" €");
-		}		
-				
-		//-	Muestra las subastas de las que son propietarios los tres usuarios.
-				
-		for (Usuarios usuario : usuarios) {
-			System.out.println("Subastas de " + usuario.getNombre() + " = " + usuario.getSubastasCreadas());
-		}
+			//-	El usuario Pedro puja por esa subasta 100 euros.
+			
+			System.out.println("Puja de Pedro: "+subasta.pujar(pedro, 100));
+			
+			//TimeUnit.SECONDS.sleep(30);
+			
+			//-	El usuario Enrique puja por esa subasta 50 euros.
+			
+			System.out.println("Puja de enrique: "+subasta.pujar(enrique, 50));
+			
+			//TimeUnit.SECONDS.sleep(30);
+			
+			//- Cierra la subasta
+			
+			System.out.println("\nSe ha cerrado la subasta "+subasta.cerrar());
+			
+			//-	Muestra en la consola la puja mayor de la subasta (nombre del usuario y cantidad).
+			
+			System.out.println("\n"+subasta.PujaMayor());
+			
+			//TimeUnit.SECONDS.sleep(10);
+			
+			//-	El usuario Enrique puja de nuevo por esa subasta con 200 euros. Comprueba que no es aceptada, ya que la subasta ha sido cerrada.
+			
+			System.out.println("\nPuja de enrique "+subasta.pujar(enrique, 200));
+			
+			//-	Ejecuta la subasta.
+			
+			System.out.println("\nSe ha ejecutado la subasta "+subasta.ejecutar());
+			
+			//-	Crea una colección con los usuarios.
+			
+			LinkedList<Usuarios> usuarios = new LinkedList<Usuarios>();
+			usuarios.add(juan);
+			usuarios.add(pedro);
+			usuarios.add(enrique);
+			
+			//-	Muestra por la consola los créditos de los tres usuarios. Observa que los créditos de Juan y Pedro han cambiado.
+			
+			for (Usuarios usuario : usuarios) {
+				System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" €");
+			}		
+					
+			//-	Muestra las subastas de las que son propietarios los tres usuarios.
+					
+			for (Usuarios usuario : usuarios) {
+				System.out.println("Subastas de " + usuario.getNombre() + " = " + usuario.getSubastasCreadas());
+			}
+			
 		
 		
 		//Ejemplo con el menu
