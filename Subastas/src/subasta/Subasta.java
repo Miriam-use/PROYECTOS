@@ -28,14 +28,13 @@ public class Subasta {
  * @param producto
  * @param propietario
  */
-	Subasta(String producto, Usuarios propietario){
+	public Subasta(String producto, Usuarios propietario){
 		this.producto=producto;
 		this.propietario = propietario;
 		this.abierta = true;
 		this.pujas = new LinkedList<Puja>();
 		this.propietario.addSubasta(this);
-		tiempoSubasta=LocalTime.now();
-		tiempoSubasta=tiempoSubasta.plusMinutes(1);	
+		tiempoSubasta=LocalTime.now().plusMinutes(1);
 	}
 	
 	public String getProducto() {
@@ -119,16 +118,17 @@ public class Subasta {
 		}
 		return pujar (pujador, cantidad);
 	}
-	
+/**
+ * 	
+ * @return true la puja se ha cerrado.
+ */
 	public boolean cerrar () {
-		
-			abierta=false;
-		
+		abierta=false;
 		return true;
 	}	
 	
 /**
- * 	Este metodo cierra la subasta (la ejecuta) realizando las transferencias de credito entre 
+ * 	Este metodo ejecuta la subasta realizando las transferencias de credito entre 
  *  el usuario que ha ganado la subasta (puja mayor) y el usuario propietario. Es posible ejecutar 
  *  una subasta si se ha realizado alguna puja y la subasta está abierta. En tal caso, la ejecucion 
  *  de una subasta consiste en decrementar el credito del usuario que ha realizado la puja mayor e 
@@ -137,9 +137,7 @@ public class Subasta {
  *  ha podido ejecutarse o no (retorna un valor booleano).
  *  
  * @return true si la subasta ha podido ejecutarse y false en caso contrario
- */
-	
-	
+ */	
 	public boolean ejecutar(){
 			
 		if (cerrar()==true) {
@@ -165,7 +163,9 @@ public class Subasta {
 		return getClass().getName() + " [producto=" + producto
 									+ ", propietario=" + propietario.getNombre() 
 									+ ", abierta=" + abierta
-									+ ", pujas validas realizadas=" + pujas.size() 
+									+ ", pujas=" + pujas.size()
+									+ ", Fecha de apertura de la subasta="+ tiempoSubasta.minusMinutes(1)
+									+ ", Fecha de cierre de la subasta="+ tiempoSubasta
 									+ "]";
 	}
 }
