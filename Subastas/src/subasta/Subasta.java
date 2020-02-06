@@ -70,6 +70,10 @@ public class Subasta {
 			return null;
 		}
 	}
+	
+	public String PujaMayor() {
+		return "La puja mayor es de: "+getPujaMayor();
+	}
 /**
  * 	Este metodo permite realizar una puja sobre la subasta. La informacion necesaria 
  *  para pujar es el usuario que realiza la puja y la cantidad por la que puja. 
