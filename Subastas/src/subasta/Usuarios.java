@@ -20,7 +20,7 @@ public class Usuarios {
 	private final String nombre;
 	private double credito;
 	private LinkedList<Subasta> subastasCreadas;
-//	private LinkedList<Puja> pujas;
+
 	
 /**
  * 

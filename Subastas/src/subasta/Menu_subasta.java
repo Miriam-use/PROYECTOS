@@ -1,4 +1,6 @@
 package subasta;
+import java.time.LocalTime;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -15,23 +17,41 @@ public class Menu_subasta {
 		Usuarios pedro = new Usuarios("Pedro", 150);
 		Usuarios enrique = new Usuarios("Enrique", 300);
 		
+		System.out.println("Inserte el tiempo es segundos que quiere que dure la subasta en segundos");
+		sc = new Scanner(System.in);
+		long sec=sc.nextLong();
+	
+		LocalTime time = LocalTime.now();
+		LocalTime time1 = time.plusSeconds(sec);
+		
 		Subasta subasta = new Subasta("Telefono Movil", juan);
 
 		System.out.println("Puja de Pedro: "+subasta.pujar(pedro, 100));
 		
-		TimeUnit.SECONDS.sleep(30);
+		TimeUnit.SECONDS.sleep(29);
+		
+		if(LocalTime.now().isBefore(time1)) {
+			System.out.println("Se ha cerrado la subasta ");
+			subasta.cerrar();
+		}
 		
 		System.out.println("Puja de enrique: "+subasta.pujar(enrique, 50));
 		
-		TimeUnit.SECONDS.sleep(30);
+		TimeUnit.SECONDS.sleep(29);
 		
-		System.out.println("Se ha cerrado la subasta "+subasta.cerrar());
+		if(LocalTime.now().isBefore(time1)) {
+			System.out.println("Se ha cerrado la subasta ");
+			subasta.cerrar();
+		}
 		
 		
-		TimeUnit.SECONDS.sleep(10);
+		
 		
 		System.out.println("Puja de enrique "+subasta.pujar(enrique, 200));
-		
+		if(LocalTime.now().isBefore(time1)) {
+			System.out.println("Se ha cerrado la subasta ");
+			subasta.cerrar();
+		}
 		System.out.println("Se ha ejecutado la subasta "+subasta.ejecutar());
 		
 		

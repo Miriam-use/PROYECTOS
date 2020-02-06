@@ -117,7 +117,9 @@ public class Subasta {
 	}
 	
 	public boolean cerrar () {
-		abierta=false;
+		
+			abierta=false;
+		
 		return true;
 	}	
 	
