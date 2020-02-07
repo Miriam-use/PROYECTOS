@@ -15,16 +15,20 @@ public class Puja {
 
 	private final Usuarios pujador;
 	private final double cantidad;
-/**
- * 	
- * @param pujador
- * @param cantidad
- */
-	Puja(Usuarios pujador, double cantidad) {
+	/**
+	 * 	Constructor de la clase puja
+	 * @param pujador
+	 * @param cantidad
+	 */
+	public Puja(Usuarios pujador, double cantidad) {
 		this.pujador = pujador;
 		this.cantidad = cantidad;
 	}
 
+	/**
+	 * getters
+	 * @return pujador y cantidad
+	 */
 	public Usuarios getPujador() {
 		return pujador;
 	}
@@ -32,11 +36,15 @@ public class Puja {
 	public double getCantidad() {
 		return cantidad;
 	}
-
+	
+	/**
+	 * Información completa de la puja
+	 * @return pujador y cantidad pujada
+	 */
 	@Override
 	public String toString() {
 		return getClass().getName() + " [pujador=" + pujador.getNombre() 
 									+ ", cantidad=" + cantidad 
-									+ " €]";
+									+ "]";
 	}
 }

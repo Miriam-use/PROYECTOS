@@ -22,22 +22,29 @@ public class Subasta {
 	private boolean abierta;
 	private LinkedList<Puja> pujas;
 	private LocalTime tiempoSubasta;
+	private int tiempoAbierta;
 	
 /**
- * 	
+ * 	constructor clase subasta.Se indica ademas del producto y propietario 
+ * el tiempo que la subasta va a estar abierta. 
  * @param producto
  * @param propietario
+ * @param tiempoAbierta
  */
-	Subasta(String producto, Usuarios propietario){
+	public Subasta(String producto, Usuarios propietario, int tiempoAbierta){
 		this.producto=producto;
 		this.propietario = propietario;
 		this.abierta = true;
+		this.tiempoAbierta=tiempoAbierta;
 		this.pujas = new LinkedList<Puja>();
 		this.propietario.addSubasta(this);
-		tiempoSubasta=LocalTime.now();
-		tiempoSubasta=tiempoSubasta.plusMinutes(1);	
+		tiempoSubasta=LocalTime.now().plusSeconds(tiempoAbierta);
 	}
 	
+	/**
+	 * getters
+	 * @return producto , propietario, abierta , Crearsubasta , Pujas ,pujador
+	 */
 	public String getProducto() {
 		return producto;
 	}
@@ -62,7 +69,13 @@ public class Subasta {
 		return "Pujador: "+getPujas();
 	}
 	
-	//Propiedad calculada
+	//con un bucle if comprobamos si las pujas no estan vacias. y devuelve la ultima puja ya que sera la mas alta.
+	//de lo contrario devuelbe un valor nulo
+	
+	/**
+	 * Metodo para consegir la puja mayor
+	 * @return
+	 */
 	public Puja getPujaMayor(){
 		if (!pujas.isEmpty()) {
 			return pujas.getLast();
@@ -70,16 +83,23 @@ public class Subasta {
 			return null;
 		}
 	}
+	/**
+	 * Metodo que muestra la puja mayor
+	 * @return puja mayor
+	 */
+	public String PujaMayor() {
+		return "La puja mayor es de: "+getPujaMayor();
+	}
 /**
- * 	Este metodo permite realizar una puja sobre la subasta. La informacion necesaria 
- *  para pujar es el usuario que realiza la puja y la cantidad por la que puja. 
+ * 	Metodo para hacer una puja sobre la subasta. Nos pedira
+ *  el usuario que realiza la puja y la cantidad por la que puja. 
  *  La puja es aceptada si: 
  *    a) la subasta esta abierta, 
  *    b) el credito del usuario que la realiza es suficiente para la cantidad por la que puja; 
  *    c) el usuario no es propietario de la subasta y 
  *    d) la cantidad es mayor que la cantidad de la puja mayor, si la hubiera. 
- *  Por tanto, esta operacion finaliza indicando si la puja ha sido aceptada (retorna un valor booleano). 
- *  Si la puja es aceptada, entonces se construye una puja y se almacena en la lista de pujas
+ *  Esta operacion acaba indicando si la puja ha sido aceptada  
+ *  Si la puja se acepta, se construye una puja y se almacena en la lista de pujas
  * 	
  * @param pujador Usuarios que realiza la puja
  * @param cantidad cantidad por la que se puja
@@ -99,10 +119,11 @@ public class Subasta {
 		}
 	}
 	
+
 /**
- * 	Este metodo permite pujar sin indicar la cantidad, es decir, solo se requiere indicar el usuario que la realiza. 
+ * 	Metodo que permite pujar sin indicar la cantidad. solo se pide el usuario que la realiza. 
  *  La cantidad sera un euro mas que la cantidad de la puja mayor. 
- *  Si no hubiera puja mayor, la cantidad ser√≠a de un euro.
+ *  Si no hubiera puja mayor, la cantidad serÌa de un euro.
  *  
  * @param pujador usuario que realiza la puja
  * @return true si se ha realizado la puja y false en caso contrario
@@ -116,28 +137,30 @@ public class Subasta {
 		return pujar (pujador, cantidad);
 	}
 	
+	
+/**
+ * 	Metodo para cerrar una subasta
+ * @return true la puja se ha cerrado.
+ */
 	public boolean cerrar () {
 		abierta=false;
 		return true;
 	}	
 	
+	
 /**
- * 	Este metodo cierra la subasta (la ejecuta) realizando las transferencias de credito entre 
- *  el usuario que ha ganado la subasta (puja mayor) y el usuario propietario. Es posible ejecutar 
- *  una subasta si se ha realizado alguna puja y la subasta est√° abierta. En tal caso, la ejecucion 
- *  de una subasta consiste en decrementar el credito del usuario que ha realizado la puja mayor e 
- *  incrementar el credito del propietario de la subasta por la cantidad de la puja mayor. 
- *  Una vez ejecutada, la subasta quedara cerrada. El metodo finaliza informando si la subasta 
- *  ha podido ejecutarse o no (retorna un valor booleano).
+ * 	Este metodo ejecuta la subasta haciendo el intercambio de credito entre 
+ *  el usuario ganador y el usuario propietario. Se puede ejecutar 
+ *  una subasta si se ha hecho alguna puja y est· abierta. La ejecucion 
+ *  consiste en restar el credito del usuario que ha realizado la puja mayor y 
+ *  aumentar el credito del propietario de la subasta (por la cantidad de la puja mayor. 
+ *  El metodo finaliza informando si la subasta ha podido ejecutarse o no (retorna un valor booleano).
  *  
  * @return true si la subasta ha podido ejecutarse y false en caso contrario
- */
-	
-	
+ */	
 	public boolean ejecutar(){
 			
 		if (cerrar()==true) {
-
 				
 				Usuarios ganador = getPujaMayor().getPujador();
 				
@@ -154,12 +177,19 @@ public class Subasta {
 		return false;	
 	}
 	
+	
+	/**
+	 * Informacion completa de una subasta
+	 * @return productor , propietario ,abierta, pujas, fecha de apertura de la subasta y fecha de cierre de la subasta
+	 */
 	@Override
 	public String toString() {
 		return getClass().getName() + " [producto=" + producto
 									+ ", propietario=" + propietario.getNombre() 
 									+ ", abierta=" + abierta
-									+ ", pujas validas realizadas=" + pujas.size() 
+									+ ", pujas=" + pujas.size()
+									+ ", Fecha de apertura de la subasta="+ tiempoSubasta.minusSeconds(tiempoAbierta)
+									+ ", Fecha de cierre de la subasta="+ tiempoSubasta
 									+ "]";
 	}
 }
