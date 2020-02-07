@@ -35,7 +35,7 @@ public class Main {
 			System.out.println("Introduce en segundos el tiempo que la subasta estara abierta:");
 			seg=ex.controlaInt();
 				
-			//-	Crea una subasta del producto "TelÃ©fono MÃ³vil" cuyo propietario sea el usuario Juan
+			//-	Crea una subasta del producto "Teléfono Móvil" cuyo propietario sea el usuario Juan
 			
 			Subasta subasta = new Subasta("Telefono Movil", juan,seg);
 			
@@ -43,7 +43,7 @@ public class Main {
 			
 			System.out.println("Puja de Pedro: "+subasta.pujar(pedro, 100));
 			
-			//aÃ±adimos 10 segundos de retardo
+			//añadimos 10 segundos de retardo
 			TimeUnit.SECONDS.sleep(10);
 			
 			//-	El usuario Enrique puja por esa subasta 50 euros.
@@ -70,32 +70,31 @@ public class Main {
 			
 			System.out.println("\nSe ha ejecutado la subasta "+subasta.ejecutar());
 			
-			//-	Crea una colecciÃ³n con los usuarios.
+			//-	Crea una colección con los usuarios.
 			
 			LinkedList<Usuarios> usuarios = new LinkedList<Usuarios>();
 			usuarios.add(juan);
 			usuarios.add(pedro);
 			usuarios.add(enrique);
 			
-			//-	Muestra por la consola los crÃ©ditos de los tres usuarios. Observa que los crÃ©ditos de Juan y Pedro han cambiado.
+			//-	Muestra por la consola los créditos de los tres usuarios. Observa que los créditos de Juan y Pedro han cambiado.
 			
 			for (Usuarios usuario : usuarios) {
-				System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" â‚¬");
-			}
+				System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" €");
+			}	
 			
 			// - for usando lambda
 			
-			// - usuarios.stream().forEach(u -> System.out.println("Credito de " + u.getNombre() + " = "+ u.getCredito()+" â‚¬"));
-					
+			// - usuarios.stream().forEach(u -> System.out.println("Credito de " + u.getNombre() + " = "+ u.getCredito()+" €"));
+			
 			//-	Muestra las subastas de las que son propietarios los tres usuarios.
 					
 			for (Usuarios usuario : usuarios) {
 				System.out.println("Subastas de " + usuario.getNombre() + " = " + usuario.getSubastasCreadas());
 			}
 			
-			// - for usando lambda
-			
 			//- usuarios.stream().forEach(u -> System.out.println("Subasta de " + u.getNombre() + " = "+ u.getSubastasCreadas()));
+			
 			
 			
 			
@@ -108,7 +107,7 @@ public class Main {
 			
 			int opcion;
 			do {
-				// Al inicio de cada iteraciÃ³n mostramos el menÃº, y recogemos la opciÃ³n
+				// Al inicio de cada iteración mostramos el menú, y recogemos la opción
 				menu();
 				opcion = Integer.parseInt(sc.nextLine());
 				switch (opcion) {
@@ -133,7 +132,7 @@ public class Main {
 					usuarios.add(pedro);
 					usuarios.add(enrique);
 					for (Usuarios usuario : usuarios) {
-						System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" â‚¬");
+						System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" €");
 					}		
 							
 					//-	Muestra las subastas de las que son propietarios los tres usuarios.
@@ -161,7 +160,7 @@ public class Main {
 			System.out.println("3. Cerrar subasta");
 			System.out.println("4. Realizar puja fuera de plazo (Enrique)");
 			System.out.println("5. Ejecutar subasta");
-			System.out.println("6. Consultar situaciÃ³n");
+			System.out.println("6. Consultar situación");
 			System.out.println("0. Salir");
 		}
 		*/

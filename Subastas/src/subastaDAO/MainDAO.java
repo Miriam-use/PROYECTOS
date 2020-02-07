@@ -12,6 +12,7 @@ public class MainDAO {
 	static Scanner sc;
 	static int seg;
 	static subasta.Excepciones ex;
+	private static int i;
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
@@ -32,7 +33,7 @@ public class MainDAO {
 		 	System.out.println("\nIntroduce en segundos el tiempo que la subasta estara abierta:");
 		 	seg=ex.controlaInt();	
 		
-		//-	Crea una subasta del producto "TelÃ©fono MÃ³vil" cuyo propietario sea el usuario Juan
+		//-	Crea una subasta del producto "Teléfono Móvil" cuyo propietario sea el usuario Juan
 		
 		SubastaDAO subasta = new SubastaDAO("Telefono Movil", usuario.usuario().get(0),seg);
 		
@@ -81,22 +82,30 @@ public class MainDAO {
 		
 		System.out.println("\nSe ha ejecutado la subasta "+subasta.ejecutarSubasta(0));
 		
-		//-	Crea una colecciÃ³n con los usuarios.
+		//-	Crea una colección con los usuarios.
 		
 		LinkedList<Usuarios> usuarios = new LinkedList<Usuarios>();
 		usuarios.add(usuario.usuario().get(0));
 		usuarios.add(usuario.usuario().get(1));
 		usuarios.add(usuario.usuario().get(2));
 		
-		//-	Muestra por la consola los crÃ©ditos de los tres usuarios. Observa que los crÃ©ditos de Juan y Pedro han cambiado.
+		//-	Muestra por la consola los créditos de los tres usuarios. Observa que los créditos de Juan y Pedro han cambiado.
 		
 		for(int i=0; i<3; i++) {
 			System.out.println("Credito de "+usuario.getNombre(i)+" = "+usuario.getCredito(i));
 		}
 		
+		// - for usando lambda
+		
+		//usuarios.stream().forEach(u -> System.out.println("Credito de " + u.getNombre() + " = "+ u.getCredito()+" €"));
+					
+		
 		for(int i=0; i<3; i++) {
 			System.out.println("Subastas de "+usuario.getNombre(i)+" = "+usuario.CrearSubasta(i));
 		}
+		
+		//- usuarios.stream().forEach(u -> System.out.println("Subasta de " + u.getNombre() + " = "+ u.getSubastasCreadas()));
+		
 	}
 
 }

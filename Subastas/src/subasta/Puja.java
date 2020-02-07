@@ -43,7 +43,7 @@ public class Puja {
 	 */
 	@Override
 	public String toString() {
-		return getClass().getName() + " [pujador=" + pujador.getNombre() 
+		return "[pujador=" + pujador.getNombre() 
 									+ ", cantidad=" + cantidad 
 									+ "]";
 	}
