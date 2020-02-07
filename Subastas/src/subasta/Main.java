@@ -83,7 +83,7 @@ public class Main {
 				System.out.println("Credito de " + usuario.getNombre() + " = "+ usuario.getCredito()+" €");
 			}
 			
-			// - fol usando lambda
+			// - for usando lambda
 			
 			// - usuarios.stream().forEach(u -> System.out.println("Credito de " + u.getNombre() + " = "+ u.getCredito()+" €"));
 					
@@ -93,7 +93,7 @@ public class Main {
 				System.out.println("Subastas de " + usuario.getNombre() + " = " + usuario.getSubastasCreadas());
 			}
 			
-			// - fol usando lambda
+			// - for usando lambda
 			
 			//- usuarios.stream().forEach(u -> System.out.println("Subasta de " + u.getNombre() + " = "+ u.getSubastasCreadas()));
 			
