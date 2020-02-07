@@ -123,7 +123,7 @@ public class Subasta {
 /**
  * 	Metodo que permite pujar sin indicar la cantidad. solo se pide el usuario que la realiza. 
  *  La cantidad sera un euro mas que la cantidad de la puja mayor. 
- *  Si no hubiera puja mayor, la cantidad serÌa de un euro.
+ *  Si no hubiera puja mayor, la cantidad ser√≠a de un euro.
  *  
  * @param pujador usuario que realiza la puja
  * @return true si se ha realizado la puja y false en caso contrario
@@ -151,7 +151,7 @@ public class Subasta {
 /**
  * 	Este metodo ejecuta la subasta haciendo el intercambio de credito entre 
  *  el usuario ganador y el usuario propietario. Se puede ejecutar 
- *  una subasta si se ha hecho alguna puja y est· abierta. La ejecucion 
+ *  una subasta si se ha hecho alguna puja y est√° abierta. La ejecucion 
  *  consiste en restar el credito del usuario que ha realizado la puja mayor y 
  *  aumentar el credito del propietario de la subasta (por la cantidad de la puja mayor. 
  *  El metodo finaliza informando si la subasta ha podido ejecutarse o no (retorna un valor booleano).
@@ -184,12 +184,22 @@ public class Subasta {
 	 */
 	@Override
 	public String toString() {
-		return getClass().getName() + " [producto=" + producto
-									+ ", propietario=" + propietario.getNombre() 
-									+ ", abierta=" + abierta
-									+ ", pujas=" + pujas.size()
-									+ ", Fecha de apertura de la subasta="+ tiempoSubasta.minusSeconds(tiempoAbierta)
-									+ ", Fecha de cierre de la subasta="+ tiempoSubasta
-									+ "]";
+		if(abierta == true) {
+			return  "producto=" + producto
+					+ ", propietario=" + propietario.getNombre() 
+					+ ", abierta= abierta"
+					+ ", pujas=" + pujas.size()
+					+ ", Fecha de apertura de la subasta="+ tiempoSubasta.minusSeconds(tiempoAbierta)
+					+ ", Fecha de cierre de la subasta="+ tiempoSubasta
+					+ "]";
+		}else {
+			return  "producto=" + producto
+					+ ", propietario=" + propietario.getNombre() 
+					+ ", abierta= cerrada"
+					+ ", pujas=" + pujas.size()
+					+ ", Fecha de apertura de la subasta="+ tiempoSubasta.minusSeconds(tiempoAbierta)
+					+ ", Fecha de cierre de la subasta="+ tiempoSubasta
+					+ "]";
+		}
 	}
 }
